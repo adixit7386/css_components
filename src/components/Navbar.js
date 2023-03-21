@@ -1,4 +1,4 @@
-import React from "react";
+import React,{useState} from "react";
 import Styled from "styled-components";
 import MenuRoundedIcon from "@mui/icons-material/MenuRounded";
 import SearchRoundedIcon from "@mui/icons-material/SearchRounded";
@@ -125,6 +125,12 @@ const IconStyle = {
   cursor: "pointer",
 };
 const Navbar = () => {
+  const [search,setSearch]=useState("");
+  const handleSearch=()=>{
+    console.log(search);
+  }
+
+
   return (
     <Container>
       <Wrapper>
@@ -137,11 +143,11 @@ const Navbar = () => {
           </TitleContainer>
         </Left>
         <Center>
-          <InputContainer>
-            <Input placeholder="Search" />
+          <InputContainer onKeyPress={(e) => e.code==="Enter"&&handleSearch()}>
+            <Input onChange={(e)=>{setSearch(e.target.value)}} placeholder="Search" />
           </InputContainer>
           <SearchIconContainer>
-            <SearchRoundedIcon style={IconStyle} />
+            <SearchRoundedIcon onClick={()=>handleSearch()} style={IconStyle} />
           </SearchIconContainer>
         </Center>
         <Right>
